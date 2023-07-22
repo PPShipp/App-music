@@ -93,13 +93,19 @@
     justify-content: space-around;
     padding: 18px 0 8px 0;
   }
-  
   .control .btn {
     color: #666;
     padding: 18px;
     font-size: 18px;
   }
-  
+  .control .btn-repeat :hover,
+  .control .btn-prev :hover,
+  .control .btn-next :hover,
+  .control .btn-random :hover
+  {
+    color: var(--primary-color);
+    cursor: pointer;
+  }
   .control .btn.active {
     color: var(--primary-color);
   }
@@ -115,7 +121,9 @@
     justify-content: center;
     background-color: var(--primary-color);
   }
-  
+  .control .btn-toggle-play {
+    cursor: pointer;
+  }
   /* Trong phần CSS */
 .progress {
   width: 100%;
@@ -203,6 +211,11 @@
     border-radius: 5px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   }
+  .song:hover
+  {
+    cursor: pointer;
+    background-color: var(--primary-color);
+  }
   
   .song.active {
     background-color: var(--primary-color);
@@ -215,6 +228,11 @@
   .song.active .option,
   .song.active .author,
   .song.active .title {
+    color: #fff;
+  }
+  .song .option:hover,
+  .song .body .title:hover,
+  .song .body .author:hover {
     color: #fff;
   }
   
