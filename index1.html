@@ -26,7 +26,10 @@
                     style="background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg')">
                 </div>
             </div>
-
+            <div class="volume-control">
+              <i class="fas fa-volume-down"></i>
+              <input id="volume" class="volume-slider" type="range" value="100" step="1" min="0" max="100">
+          </div>
             <!-- Control -->
             <div class="control">
                 <div class="btn btn-repeat">
@@ -47,7 +50,8 @@
                 </div>
             </div>
 
-            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100"   onchange="changeProgress()"
+            >
 
             <audio id="audio" src=""></audio>
             <p class="lyrics" style="white-space: pre-line;">
@@ -72,9 +76,10 @@
             lyricsContainer.textContent = "Chưa có lyrics";
           }
         }
+        
         const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
+const volumeSlider = $("#volume");
 const PlAYER_STORAGE_KEY = "F8_PLAYER";
 
 const player = $(".player");
@@ -82,6 +87,7 @@ const cd = $(".cd");
 const heading = $("header h2");
 const cdThumb = $(".cd-thumb");
 const audio = $("#audio");
+const progess = $("#progress")
 const playBtn = $(".btn-toggle-play");
 const progress = $("#progress");
 const prevBtn = $(".btn-prev");
@@ -823,7 +829,11 @@ const app = {
     //   cd.style.width = newCdWidth > 0 ? newCdWidth + "px" : 0;
     //   cd.style.opacity = newCdWidth / cdWidth;
     // };
-
+    //  Xử lý tăng giảm âm lượng
+    volumeSlider.oninput = function () {
+        const volumeValue = this.value;
+        audio.volume = volumeValue / 100;
+    };
     // Xử lý khi click play
     // Handle when click play
     playBtn.onclick = function () {
@@ -860,7 +870,13 @@ const app = {
         progress.value = progressPercent;
       }
     };
-
+    audio.ontimeupdate = function () {
+  if (audio.duration) {
+    const progressPercent = Math.floor((audio.currentTime / audio.duration) * 100);
+    progress.value = progressPercent;
+    document.documentElement.style.setProperty("--progress", progressPercent);
+  }
+};
     // Xử lý khi tua song
     // Handling when seek
     progress.onchange = function (e) {
