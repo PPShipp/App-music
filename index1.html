@@ -50,7 +50,7 @@
             <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
 
             <audio id="audio" src=""></audio>
-            <p class="lyrics">
+            <p class="lyrics" style="white-space: pre-line;">
               Lyrics: 
             </p>
         </div>
@@ -63,6 +63,15 @@
     </div>
 
     <script>
+        function displayLyrics(songName) {
+          const lyrics = songLyrics[songName];
+          const lyricsContainer = document.querySelector(".lyrics");
+          if (lyrics) {
+            lyricsContainer.textContent = `Lyrics: ${lyrics}`;
+          } else {
+            lyricsContainer.textContent = "Chưa có lyrics";
+          }
+        }
         const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
@@ -81,7 +90,7 @@ const randomBtn = $(".btn-random");
 const repeatBtn = $(".btn-repeat");
 const playlist = $(".playlist");
 const songLyrics = {
-  "song1": `Yo yo its boy B-red 
+  "All My Ninja": `Yo yo its boy B-red 
 i got homies b-ray
 we gone show ya how do this here
 
@@ -135,7 +144,7 @@ AINT NOBODY FUCKING WITH
 I GOT A HUDDIT ON IT BABY WHATS IT GONNA BE
 AND SHE SAY`,
 
-  "song2": `Nàng đi qua lối đó... huh...
+  "Nàng": `Nàng đi qua lối đó... huh...
 1...2..3...Let's go
 Ngắm hoàng hôn từ tầng ba
 Vang nhịp gót giày đằng xa
@@ -209,7 +218,7 @@ Vì một làn tóc ngỡ như mây trời
 Hình dáng ấy qua đây từng ngày mây trôi lạc loài
 Bao anh bao anh đắm say`,
 
-"song3": `Baby gọi cho anh mỗi lúc thấy say
+"Baby Gọi Cho Anh": `Baby gọi cho anh mỗi lúc thấy say
 Khi bên cạnh em chẳng có ai
 I wanna make you fall in love
 Ta làm gì đó có chút sai
@@ -277,7 +286,7 @@ Ly rượu trong anh - Oh baby
 Oh you know i could never lie
 If you can look me in my eyes.`,
 
-"song4": `Bước đi! Bước đi
+"Truong Sương": `Bước đi! Bước đi
 Nếu như em không muốn ở lại
 Tiếc chi! Tiếc chi
 Bởi những thứ ngoài tai
@@ -306,7 +315,7 @@ Em biết gì về chuyện tình yêu
 Em muốn được gì
 Em muốn được ở nhà lầu cao?`,
 
-"song5": `Thích là tới
+"Né": `Thích là tới
 Chứ không né né né né
 Anh em chơi sao cool
 Đừng để né né né
@@ -404,7 +413,7 @@ Thích thể hiện là ta đây
 Yêu yêu yêu hay là không yêu
 Thì nói đừng có mà nhây nhây`,
 
-"song6": `Tao cho mày, 10 ngày để mày nói đầu hàng, 
+"Call Down Freestyle": `Tao cho mày, 10 ngày để mày nói đầu hàng, 
 Hay nhắn tin hẹn gặp tao như thằng Choi đầu bạc, 
 Cả fan mày nó cũng bắt đầu đi nói mày xàm, 
 Team mày chắc lắc đầu vì mày đưa sói vào làng, 
@@ -436,7 +445,7 @@ Mày thành công việc quảng cáo cho cái pool party,
 Mày tập tạ, nhưng mà tao mới là người có body.
 Bodybag.`,
 
-"song7": `Em nói đừng tin vào tình yêu à? (Oh no)
+"Thích Quá Rùi Nà": `Em nói đừng tin vào tình yêu à? (Oh no)
 Nhưng khi trông thấy anh con tim em loạn nhịp (Oh)
 Anh cho rằng lẽ nào mình siêu thật? (Woah)
 Bởi vì em nói nhớ anh mỗi khi màn đêm buông
@@ -488,7 +497,7 @@ Biết mũi tên thần tình yêu đã bắn đi
 Trúng hay hụt em chắc cupid không hụt đâu
 Và biết ta cũng lỡ thích nhau hơi nhiều quá rùi nờ`,
 
-"song8": `
+"Bước Đều Bước": `
 Và nó lại...
 Bước, bước đều bước, 
 Bước, bước, bước đều bước,
@@ -548,7 +557,7 @@ Trong túi quần tôi là cuộn băng, ghi rất rõ lời thú tội,
 1 xác nam, 1 xác nữ, và hung khí ở trong nhà, 
 Xác nữ sẽ thiếu đi mất quả tim, vì tôi đã ăn nó hôm qua."`,
 
-"song9": `Nhạc của Anh, không thị trường
+"Nhạc Anh": `Nhạc của Anh, không thị trường
 Đây là Hip Hop, không phải Pop, không bình thường
 Nhạc của Anh là thương hiệu của đường phố
 Bruuhh nhạc của Anh là phải mở trên ôtô
@@ -612,7 +621,7 @@ Không xay hết hôm nay thì anh để tới mai
 Không thể trao anh lời nói dối
 Các em chỉ thốt lên là ối xờiii, yeah`,
 
-"song10": `Ahh, 40 độ và nắng nóng
+"40 Độ": `Ahh, 40 độ và nắng nóng
 Chưa bước chân ra đường đã đổ mồ hôi
 Khoác cái jacket phản quang và sáng bóng
 Cưỡi Wave đèo đằng sau một rổ đồ chơi
@@ -686,6 +695,8 @@ Mấy thằng bạn bảo anh là đồ dở hơi
 Nhưng mà vẫn những trưa hè nắng nóng
 Nhấc điện thoại bảo khách là chờ ở đây`,
 
+  // Thêm lời bài hát cho các bài hát khác tương tự
+  // ...
 };
 const app = {
   currentIndex: 0,
@@ -950,10 +961,13 @@ const app = {
     }, 300);
   },
   loadCurrentSong: function () {
-    heading.textContent = this.currentSong.name;
-    cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
-    audio.src = this.currentSong.path;
-  },
+            heading.textContent = this.currentSong.name;
+            cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
+            audio.src = this.currentSong.path;
+            const currentSongName = this.currentSong.name;
+            // Load lời bài hát của bài hát đang phát
+            displayLyrics(currentSongName);
+          },
   loadConfig: function () {
     this.isRandom = this.config.isRandom;
     this.isRepeat = this.config.isRepeat;
